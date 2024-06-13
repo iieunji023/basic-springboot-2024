@@ -13,6 +13,9 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
     - JSP, **Thymeleaf**, Mustache 등 ... 편하게 사용 가능
     - DB 연동이 무지 쉽다.
 
+  - MVC
+     <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp002.png" width=730">
+
 - Spring Boot 개발환경 설정
   - Java JDK 확인 > 17버전 이상
     - https://jdk.java.net/archive/
@@ -70,6 +73,9 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
     - Spring Boot Dashboard
       - Apps > spring01 Run | Debug 중에서 하나의 아이콘 클릭 서버 실행
       - 디버그로 실행해야 Hot code replace가 동작!!!
+
+        <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp001.png" width="350">
+
     - 브라우저 변경 설정
       - 설정(Ctrl + ,) > browser > Spring Dashboard Open With 'Internal' -> 'External'로 변경
       - Chrome을 기본 브라우저 사용 추천
