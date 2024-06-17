@@ -231,7 +231,25 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
   - Spring03 폴더 내에서 **Generate into this folder**
 
 - Spring Boot JPA 프로젝트 개발시작
-  1. build.gradle 디펜던시 확인
-  2. application.prooerties 기본설정 입력(포트번호, 로그색상, 자동재빌드, 로그레벨)
-  3. 각 기능별로 폴더를 생성(Controller, service, entity ...)
+  1. (설정) build.gradle 디펜던시 확인
+  2. (설정) application.prooerties 기본설정 입력(포트번호, 로그색상, 자동재빌드, 로그레벨)
+  3. MVC 패턴에 맞춰서 각 기능별로 폴더를 생성(Controller, service, entity ...)
   4. /controller/MainController.java 생성, 기본 메서드 구현
+  5. (설정) application.properties H2, JPA 설정 추가
+  6. (설정) 웹 서버 실행 http://localhost:8080/h2-console DB 연결 확인
+
+  7. /entity/Board.java 생성
+    - GenerationType 타입
+      - AUTO: SpringBoot에서 자동으로 선택(X)
+      - IDENTITY: MySQL, SQLServer
+      - SEQUENCE: Oracle
+    - column 이름을 createDate로 만들면 DB에서 컬럼명 create_date로 생성됨
+      - 컬럼명에 언더바(_)를 넣지 않으려면 @column(name="createDate")을 사용해서 변경
+  8. /entity/Reply.java 생성
+  9. 두 entity 간 @OneToMany, @ManyToOne을 설정
+  10. 웹 서버 재시작 후 h2-console에서 생성 확인
+  11. /repository/BoardRepository.java 빈 인터페이스(JpaRepository) 생성
+  12. /repository/ReplyRepository.java 빈 인터페이스 생성
+  13. application.properties ddl-auto-create -> ddl-auto-update로 변경
+  14. /test/.../repository/BoardRepositoryTests.java 생성, 테스트 메서드 작성
+  15. 테스트 시작 > 웹 서버 실행 > h2-console 확인
