@@ -80,7 +80,7 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
       - 설정(Ctrl + ,) > browser > Spring Dashboard Open With 'Internal' -> 'External'로 변경
       - Chrome을 기본 브라우저 사용 추천
 
-## 2일차
+## 2일차, 3일차
 - Oracle 도커로 설치
   - Docker는 Virtual Machine을 업그레이드한 시스템
   - 윈도우 서비스 내(services.mnsc) Oracle관련 서비스 종료
@@ -138,14 +138,22 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
     - H2 DB - Spring Boot에 내장된 Inmemory DB, Oracle, mySQL, SQLServer과 쉽게 호환
     - MySQL - Optional 설명할 DB
 
-  - Spring Boot + MyBatis
+  - Spring Boot + MyBatis 프로젝트
     - com.eunji.spring02
     - application name: spring02
-    - Spring Boot 3.3.x 에는 MyBatis 없음 -> 3.2.6으로 시작!
-    - Dependency 중 DB(H2, Oracle, MYSQL)가 선택되어 있으면 웹 서버 실행이 안됨
+    - Spring Boot 3.2.6 선택 - 3.3.x 에는 MyBatis 없음
+    - Dependency
+      - Spring Boot DevTools
+      - Lombok
+      - Spring Web
+      - Thymeleaf
+      - Oracle Driver
+      - Mybatis starter
 
     - build.gradle 확인
     - application.properties 추가 작성
+    - Dependency 중 DB(H2, Oracle, MYSQL)가 선택되어 있으면 웹 서버 실행이 안됨. application.properties에 DB설정이 안되면 서버 실행 안됨
+
     ```properties
     spring.application.name=spring02
 
@@ -166,15 +174,64 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
     ## Oracle 설정
     spring.datasource.username=PKNUSB
     spring.datasource.password=pknu_p@ss
-    spring.datasource.url=jdbc:oracle:thin@localhost:11521:FREE
+    spring.datasource.url=jdbc:oracle:thin:@localhost:11521:FREE
+    # oracle.jdbc.driver.OracleDriver는 구버전에서는 동작. 최신버전에서는 사용하지 말 것.
     spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 
     ## MyBatis 설정
     ## mapper 폴더 밑에 여러가지 폴더가 내재, 확장자는 .xml이지만 파일명은 뭐든지
     mybatis.mapper-locations=classpath:mapper/**/*.xml
-    mybatis.type-aliases-package=com.eunji.spring02.domain
+    mybatis.type-aliases-package=com.eunji.spring02.mapper
     ```
 
     - MyBatis 적용
       - Spring에서는 resource/WEB-INF 위치에 root-context.xml에 DB, Mybatis 설정
       - SpringBoot 이후 application.properties + Config.java로 변경
+
+    - MyBatis 개발시 순서
+      0. application.properties jdbc:oracle:thin:@localhost:11521:FREE, thin뒤 :이 삭제되어 있었음
+      1. Database 테이블 생성
+      2. MyBatis 설정 -> /config/MybatisConfig.java
+      3. 테이블과 일치하는 클래스 생성(domain, entity, dto, vo(readonly), etc...) 생성
+        - 테이블 컬럼 _는 Java 클래스는 사용안함
+      4. DB에 데이터를 주고 받을 수 있는 클래스(dao, **mapper**, repository ...) 생성
+        - 쿼리를 클래스 내 작성 가능, xml로 분리가능
+      5. (Model) 분리했을 경우 /resource/mapper/클래스.xml 생성, 쿼리 입력
+      6. 서비스 인터페이스 /service/*Service.java, 서비스 구현한 클래스 /service/*ServiceImpl.java 생성 
+      7. 사용자 접근하는 Controller @RestController 클래스 생성 -> @Controller 변경 가능
+      8. (Controller) 경우에 따라 @SpringBootApplication 클래스에 SqlSessionFactory 빈을 생성 메서드 작성
+      9. (View) /resource/templates/ Thymeleaf html 생성, 작성
+
+## 4일차
+- Spring Boot JPA + Oracle + Thymeleaf + React
+  - JPA -> DB 설계를 하지 않고 엔티티 클래스를 DB로 자동생성 해주는 기술, Query로 만들 필요없음
+  - H2 -> Oracle, MySQL, SQLServer 등과 달리 Inmemory DB, 스프링부트와 같이 실행되는 DB
+    - 개발 편의성, 다른 DB로 전환시 편리, 개발하는 동안 사용하는 것을 추천
+  - Thymeleaf -> JSP의 단점 복잡한 템플릿 형태 + 스파게티코드를 해소해주는 템플릿
+  - Bootstrap -> 웹디자인 및 CSS의 혁신
+  - 소셜로그인 -> 구글, 카카오, 네이버 등등 소셜로 로그인 기능
+  - React -> 프론트엔드를 분리, 백엔드 서버와 프론트엔드 서버 따로 관리(통합도 가능)
+  
+- Spring Boot JPA 프로젝트 생성
+  - 명령 팔레트로 시작, Spring Initialzr: Create a Gradle Project ...
+  - Spring Boot version -> 3.2.6
+  - project language -> Java
+  - Group Id -> com.eunji
+  - Arifact Id -> backboard
+  - packaging type -> Jar
+  - java version -> 17
+  - Dependency
+    1. Spring Boot DevTools
+    2. Lombok
+    3. Spring Boot Web
+    4. Thymeleaf
+    5. Oracle Driver(later)
+    6. H2 Database(later)
+    7. Data JPA(later)
+  - Spring03 폴더 내에서 **Generate into this folder**
+
+- Spring Boot JPA 프로젝트 개발시작
+  1. build.gradle 디펜던시 확인
+  2. application.prooerties 기본설정 입력(포트번호, 로그색상, 자동재빌드, 로그레벨)
+  3. 각 기능별로 폴더를 생성(Controller, service, entity ...)
+  4. /controller/MainController.java 생성, 기본 메서드 구현

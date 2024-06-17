@@ -8,7 +8,7 @@ import com.eunji.spring02.domain.Todo;
 @Mapper
 public interface TodoMapper {
   
-   List<Todo> selectTodos();
+   List<Todo> selectTodos() throws Exception;
   
-   Todo selectTodo(int tno);
+   Todo selectTodo(int tno) throws Exception;
 }
