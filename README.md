@@ -253,3 +253,45 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
   13. application.properties ddl-auto-create -> ddl-auto-update로 변경
   14. /test/.../repository/BoardRepositoryTests.java 생성, 테스트 메서드 작성
   15. 테스트 시작 > 웹 서버 실행 > h2-console 확인
+
+## 5일차
+- Tip
+	- Java Test 중 OpenJDK 64-Bit Server VM warning: Sharing is ... 빨간색 경고가 뜨면
+	- Ctrl + ,(설정) > Java Test Config 검색 > settings.json 편집
+	```json
+	    "java.test.config": {
+        "vmArgs": [
+            "-Xshare:off"
+        ]
+    }
+	```
+	- 저장 후 실행
+	
+- Spring Boot 프로젝트 오류처리
+	- 빌드를 해도 제대로 결과가 반영안되면
+	- Github Remote Repository에 모두 커밋, 푸시 후
+	- Local Repository를 모두 삭제 후 새로 커밋
+	- 프로젝트 새로 로드, 초기화
+
+- Spring Boot JPA 프로젝트 개발 계속
+	1. jUnit 테스트로 CRUD 확인
+	2. /service/BoardService.java 생성 후 getList() 메서드 작성
+	3. /controller/BoardContriller.java 생성 후 /board/list url을 실행할 수 있는 메서드 작성
+	4. /templates/board/list.html 생성
+		- Thymeleaf 속성
+			- th:if="${board != null}"
+			- th:each="board : ${boardList}"
+			- th:text="${board.title}"
+	5. /service/BoardService.java에 getBoard() 메서드 추가
+	6. /controller/BoardController.java에 /board/detail/{bno} 실행 메서드 작성
+	7. /templates/board/detail.html 생성
+	
+	8. /templates/board/detail.html 댓글 영역 추가
+	9. /service/ReplyService.java 생성, 댓글 저장 메서드 작성
+	10. /controller/ReplyController.java 생성, /reply/create/{bno} PostMapping 메서드 작성
+	
+	11. Bootstrap 적용 방법
+		- 다운로드 후 프로젝트에 위치
+		- CDN 링크를 추가
+		- https://www.getbootstrap.com 다운로드 후 압축 해제
+		- bootstrap.min.css, bootstrap.min.js resource/static에 위치
