@@ -285,6 +285,8 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
 	5. /service/BoardService.java에 getBoard() 메서드 추가
 	6. /controller/BoardController.java에 /board/detail/{bno} 실행 메서드 작성
 	7. /templates/board/detail.html 생성
+
+      <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp003.png" width="730">
 	
 	8. /templates/board/detail.html 댓글 영역 추가
 	9. /service/ReplyService.java 생성, 댓글 저장 메서드 작성
@@ -295,3 +297,35 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
 		- CDN 링크를 추가
 		- https://www.getbootstrap.com 다운로드 후 압축 해제
 		- bootstrap.min.css, bootstrap.min.js resource/static에 위치
+  12. /templates/board/list.html, detail.html Bootstrap 적용
+      <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp004.png" width="730">
+
+## 6일차
+- Spring Boot JPA 프로젝트 개발 계속
+	1. (설정) build.gradle Thymeleaf 레이아웃 사용을 위한 디펜던시 추가
+		- `implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'`
+	2. /templates/layout.html Thymeleaf로 레이아웃 템플릿 생성
+	3. list.html, detail.html에 레이아웃 템플릿 적용
+	4. /templates/layout.html에 Bootstrap CDN 적용
+	5. /templates/board/list.html에 게시글 등록 버튼 추가
+	6. /templates/board/create.html 게시글 작성 페이지 생성
+	7. /controller/BoardController.java create() GetMapping 메서드 작성
+	8. /service/BoardService.java setBoard() 작성
+	9. /controller/BoardController.java create() PostMapping 메서드 작성
+	10. (문제) 입력 값이 없어도 저장됨
+	11. (설정) build.gradle 입력값 검증 Spring Boot Validation 디펜던시 추가
+	12. /validation/BoardForm.java 클래스 생성
+	13. /controller/BoardController.java에 BoardForm을 전달(GetMapping, PostMapping 둘 다)
+	14. create.html 입력항목 name, id를 th:field로 변경(ex. th:field="*{title}")
+	15. 댓글등록에도 반영, ReplyForm, ReplyController 작업(12~14 내용과 유사)
+	16. detail.html 경고영역 div는 create.html에서 복사해서 가져올 것
+	17. (문제) 각 입력창에 공백을 넣었을 때 입력되는 문제 @NotEmpty는 스페이스를 허용 -> @NotBlank로 변경
+
+      <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp005.png" width="730">
+
+	18. /templates/layout.html에 네이게이션바(navbar) 추가
+	19. 테스트로 대량 데이터 추가
+
+## 7일차
+- Spring Boot JPA 프로젝트 개발 계속
+  1. 페이징

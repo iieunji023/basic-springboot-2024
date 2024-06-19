@@ -1,17 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>게시판 상세</title>
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-</head>
-
-<body>
-    <div class="container my-3">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+    <div layout:fragment="main-content" class="container my-3">
         <!-- 게시글 영역 -->
         <h2 th:text="${board.title}" class="border-bottom py-2"></h2>
         <div class="card text-bg-light mb-3">
@@ -38,25 +27,14 @@
             </div>
         </div>
 
-
-
-        <!-- <div>
-            <ul>
-                <li th:each="reply : ${board.replyList}" th:text="${reply.content}"></li>
-            </ul>
-        </div> -->
-
         <!-- 답변기능 영역 -->
-        <form th:action="@{|/reply/create/${board.bno}|}" method="post" class="my-3">
-            <textarea name="content" id="content" rows="10" class="form-control"></textarea>
+        <form th:action="@{|/reply/create/${board.bno}|}" th:object="${replyForm}" method="post" class="my-3">
+            <div th:replace="~{errors :: formErrorFragment}"></div>
+            <textarea name="content" th:field="*{content}" rows="10" class="form-control"></textarea>
             <div class="d-flex justify-content-end mt-2">
                 <input type="submit" value="댓글등록" class="btn btn-sm btn-primary mx-1">
                 <a href="/board/list" class="btn btn-sm btn-secondary">목록</a>
             </div>
-            
         </form>
     </div>
-    <script th:src="@{/bootstrap.min.js}"></script>
-</body>
-
 </html>

@@ -12,12 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.eunji.backboard.entity.Board;
+import com.eunji.backboard.service.BoardService;
 
 @SpringBootTest
 public class BoardRepositoryTests {
   // JUnit 테스트
   @Autowired
   private BoardRepository boardRepository;
+
+  @Autowired
+  private BoardService boardService;
+
+  @Test
+  void testThreeHunderedBoards() {
+    for (int i = 0; i < 300; i++) {
+      this.boardService.setBoard(String.format("테스트 데이터 - [%03d]", i+1),
+                                 "별 내용 없습니다.");
+    }
+  }
 
   @Test
   void testInsertBoard() {
