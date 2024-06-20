@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class BoardForm {
   @Size(max=250)
-  // @NotEmpty(message = "제목은 필수입니다.")
+  // @NotEmpty(message = "제목은 필수입니다.") - 스페이스를 허용함
   @NotBlank(message = "제목은 필수입니다.")
   private String title;
 
