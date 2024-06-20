@@ -334,14 +334,14 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
     rows fetch first 10 rows only	-- 페이지사이즈
     ```
     1. 페이징(중요!)
-      - /repository/BoardRepository.java findAll(pageable) 인터페이스 메서드 작성
-      - /service/BoardService.java getList(page) 메서드 작성
-      - /controller/BoardController.java list() 메서드 수정
-      - /templates/board/list.html boardlist -> paging 변경
-      - /templates/board/list.html 하단 페이징 버튼 추가, thymeleaf 기능 추가
-      - /service/BoardService.java getList() 최신순으로 역정렬로 변경
-      - /templates/board/list.html에 게시글 번호 수정
-        <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp006.png" width="730">
+    - /repository/BoardRepository.java findAll(pageable) 인터페이스 메서드 작성
+    - /service/BoardService.java getList(page) 메서드 작성
+    - /controller/BoardController.java list() 메서드 수정
+    - /templates/board/list.html boardlist -> paging 변경
+    - /templates/board/list.html 하단 페이징 버튼 추가, thymeleaf 기능 추가
+    - /service/BoardService.java getList() 최신순으로 역정렬로 변경
+    - /templates/board/list.html에 게시글 번호 수정
+      <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp006.png" width="730">
 
     2. /templates/board/list.html `<table>` `<td>` 내에 뱃지태그 추가
     3. H2 -> Oracle로 DB 변경
