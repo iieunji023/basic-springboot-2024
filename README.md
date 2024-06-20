@@ -343,7 +343,7 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
       - /templates/board/list.html에 게시글 번호 수정
         <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp006.png" width="730">
 
-    2. /templates/board/list.html <table> <td> 내에 뱃지태그 추가
+    2. /templates/board/list.html `<table>` `<td>` 내에 뱃지태그 추가
     3. H2 -> Oracle로 DB 변경
         - build.gradle, Oracle 디펜던시 추가
         - application.properties Oracle 관련 설정 추가, H2 설정 주석처리
