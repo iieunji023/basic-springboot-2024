@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +40,10 @@ public class Board {
   @CreatedDate
   @Column(name = "createDate", updatable = false)          // updatable = false : 작성날짜 바꾸지 않겠다는 의미
   private LocalDateTime createDate;   // 글 생성일, 컬럼명 언더바(_)일 때 변수명은 카멜표기로 사용
+
+  // 사용자가 여러 개의 게시글을 작성할 수 있다. 다대일 설정(Member가 부모, Board가 자식)
+  @ManyToOne
+  private Member writer;
 
   // 중요, RelationShip 일대다
   @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)    // 1:다의 관계(보드가 1, 댓글이 다), 게시글이 지워지면 하위에 있는 댓글도 지워진다.

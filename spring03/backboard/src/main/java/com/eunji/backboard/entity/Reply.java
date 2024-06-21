@@ -39,4 +39,8 @@ public class Reply {
   @ManyToOne    // 1:다의 관계(보드가 1, 댓글이 다)
   private Board board;
   
+  // 사용자가 여러 개의 게시글을 작성할 수 있다. 다대일 설정(Member가 부모, Board가 자식)
+  @ManyToOne
+  private Member writer;
+
 }

@@ -7,7 +7,12 @@
             <div class="card-body">
                 <div th:text="${board.content}" class="card-text"></div>
                 <div class="d-flex justify-content-end">
+                    <!-- 작성자와 작성일을 표시하는 뱃지 -->
                     <div class="badge text-bg-secondary p-2">
+                        <div class="mb-2">
+                            <span th:if="${board.writer != null}"
+                                  th:text="${board.writer.username}"></span>
+                        </div>
                         <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
                 </div>
@@ -20,7 +25,12 @@
             <div class="card-body">
                 <div th:text="${reply.content}" class="card-text"></div>
                 <div class="d-flex justify-content-end">
+                    <!-- 작성자와 작성일을 표시하는 뱃지 -->
                     <div class="badge text-bg-light p-2">
+                        <div class="mb-2">
+                            <span th:if="${reply.writer != null}"
+                                  th:text="${reply.writer.username}"></span>
+                        </div>
                         <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
                 </div>
@@ -30,7 +40,8 @@
         <!-- 답변기능 영역 -->
         <form th:action="@{|/reply/create/${board.bno}|}" th:object="${replyForm}" method="post" class="my-3">
             <div th:replace="~{errors :: formErrorFragment}"></div>
-            <textarea name="content" th:field="*{content}" rows="10" class="form-control"></textarea>
+            <textarea sec:authorize="isAnonymous()" disabled name="content" th:field="*{content}" rows="10" class="form-control"></textarea>
+            <textarea sec:authorize="isAuthenticated()" enabled name="content" th:field="*{content}" rows="10" class="form-control"></textarea>
             <div class="d-flex justify-content-end mt-2">
                 <input type="submit" value="댓글등록" class="btn btn-sm btn-primary mx-1">
                 <a href="/board/list" class="btn btn-sm btn-secondary">목록</a>
