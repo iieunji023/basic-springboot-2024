@@ -399,6 +399,8 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
 		
 		- /templates/board/list.html `<table>` 태그에 작성자 컬럼 추가
 		- /templates/board/detail.html 게시글 작성자, 댓글 작성자 표시 추가
+
+  <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp007.png" width="730">
 		
 ## 9일차
 - Spring Boot JPA 프로젝트 개발 계속
@@ -411,4 +413,12 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
 	- 조회수 추가
 	
 	- 리액트 적용
-	- AWS 라이트세일
+  - 리액트 프론트엔드 설정
+  - thymeleaf -> 리액트로 변경
+  - Spring Boot RestAPI 작업
+
+	- AWS 라이트세일 가입
+  - 서버 접속 프로그램 설정
+  - 웹서버 배포
+  - 8080 -> 80 서버
+  - http -> https 변경
