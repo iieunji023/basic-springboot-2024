@@ -3,6 +3,7 @@ package com.eunji.backboard.entity;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +34,10 @@ public class Reply {
   @CreatedDate
   @Column(name = "createDate", updatable = false)     
   private LocalDateTime createDate;   // 글 생성일
+
+  @LastModifiedDate
+  @Column(name = "modifyDate")
+  private LocalDateTime modifyDate;   // 24.06.24 수정일 추가  
 
   // 중요, ERD로 DB를 설계하지 않고 엔티티 클래스로 관계를 형성하려면 반드시 사용해야 한다.
   // RelationShip 다대일 설정

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,6 +41,10 @@ public class Board {
   @CreatedDate
   @Column(name = "createDate", updatable = false)          // updatable = false : 작성날짜 바꾸지 않겠다는 의미
   private LocalDateTime createDate;   // 글 생성일, 컬럼명 언더바(_)일 때 변수명은 카멜표기로 사용
+
+  @LastModifiedDate
+  @Column(name = "modifyDate")
+  private LocalDateTime modifyDate;   // 24.06.24 수정일 추가  
 
   // 사용자가 여러 개의 게시글을 작성할 수 있다. 다대일 설정(Member가 부모, Board가 자식)
   @ManyToOne
