@@ -2,6 +2,8 @@ package com.eunji.backboard.repository;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.eunji.backboard.entity.Board;
@@ -28,5 +30,14 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // 검색 기능
     Page<Board> findAll(Specification<Board> spec, Pageable pageable);
 
+    // 위의 메서드들은 entity가 존재했기 때문에 동작을 했으나, keyword의 경우 entity에 존재하지 않기 때문에 @Query 어노테이션을 붙여줘야 함
+    // DBeaver에서 사용할 수 있는 SQL 쿼리는 아님!
+    @Query("select distinct b " +
+           " from Board b " +
+           " left join Reply r on r.board = b " + 
+           " where b.title like %:kw% " + 
+           " or b.content like %:kw% " + 
+           " or r.content like %:kw% ")
+    Page<Board> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
 }
 

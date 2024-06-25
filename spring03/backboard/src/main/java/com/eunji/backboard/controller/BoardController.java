@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.eunji.backboard.entity.Board;
+import com.eunji.backboard.entity.Category;
 import com.eunji.backboard.entity.Member;
 import com.eunji.backboard.service.BoardService;
+import com.eunji.backboard.service.CategoryService;
 import com.eunji.backboard.service.MemberService;
 import com.eunji.backboard.validation.BoardForm;
 import com.eunji.backboard.validation.ReplyForm;
@@ -36,6 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BoardController {
   private final BoardService boardService;      // 중간 연결책
   private final MemberService memberService;    // 사용자 정보
+  private final CategoryService categoryService;  // 카테고리 사용
 
   // @RequestMapping("/list", method=RequestMethod.GET)
   // Model -> controller에 있는 객체를 View로 보내주는 역할을 하는 객체
@@ -57,6 +60,22 @@ public class BoardController {
     Page<Board> paging = this.boardService.getList(page, keyword);  // 검색 추가
     model.addAttribute("paging", paging);
     model.addAttribute("kw", keyword);
+
+    return "board/list";  
+  }
+
+  // 24.06.25. 마지막 카테고리까지 추가
+  @GetMapping("/list/{category}")
+  public String list(Model model, 
+                     @PathVariable(value="category") String category,
+                     @RequestParam(value="page", defaultValue = "0") int page,
+                     @RequestParam(value = "kw", defaultValue = "") String keyword) {
+
+    Category cate = this.categoryService.getCategory(category);
+    Page<Board> paging = this.boardService.getList(page, keyword, cate);  // 검색 및 카테고리 추가
+    model.addAttribute("paging", paging);
+    model.addAttribute("kw", keyword);
+    model.addAttribute("category", category);
 
     return "board/list";  
   }
@@ -97,6 +116,38 @@ public class BoardController {
     this.boardService.setBoard(boardForm.getTitle(), boardForm.getContent(), writer);
     return "redirect:/board/list";
   }
+
+  // category 추가
+  @PreAuthorize("isAuthenticated()")  // 로그인 시만 작성 가능
+  @GetMapping("/create/{category}")
+  public String create(Model model, 
+                      @PathVariable("category") String category, 
+                       BoardForm boardForm){
+    model.addAttribute("category", category);
+    return "board/create";
+  }
+
+  @PreAuthorize("isAuthenticated()")  // 로그인 시만 작성 가능
+  @PostMapping("/create/{category}")
+  public String create(Model model, 
+                      @PathVariable("category") String category, 
+                      @Valid BoardForm boardForm,
+                       BindingResult bindingResult, 
+                       Principal principal) {
+    if(bindingResult.hasErrors()) {
+      model.addAttribute("category", category);
+      return "board/create";    // 현재 html에 그대로 머무르기
+    }
+
+    Member writer = this.memberService.getMember(principal.getName());  // 현재 로그인 사용자 아이디
+    // this.boardService.setBoard(title, content);
+
+    Category cate = this.categoryService.getCategory(category);
+    this.boardService.setBoard(boardForm.getTitle(), boardForm.getContent(), writer, cate);
+
+    return String.format("redirect:/board/list/%s", category);
+  }
+
 
   // 수정
   @PreAuthorize("isAuthenticated()")  // 로그인 시만 작성 가능
