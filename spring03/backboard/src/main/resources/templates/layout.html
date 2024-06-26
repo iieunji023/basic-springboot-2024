@@ -55,7 +55,7 @@
           <div class="list-group">
             <a th:classappend="${category} == 'free' ? 'active'" th:href="@{/board/list/free}"
                 class="category-group rounded-0 list-group-item list-group-item-action list-group-item-light p-2">자유게시판</a>
-            <a th:classappend="${category} == 'free' ? 'active'" th:href="@{/board/list/qna}"
+            <a th:classappend="${category} == 'qna' ? 'active'" th:href="@{/board/list/qna}"
                 class="category-group rounded-0 list-group-item list-group-item-action list-group-item-light p-2">질의응답</a>
           </div>
         </nav>

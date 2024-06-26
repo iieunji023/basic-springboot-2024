@@ -19,12 +19,14 @@ import com.eunji.backboard.entity.Member;
 import com.eunji.backboard.entity.Reply;
 import com.eunji.backboard.repository.BoardRepository;
 
+import groovyjarjarantlr4.v4.Tool.Option;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 
@@ -161,5 +163,25 @@ public class BoardService {
       }
     };
   }
+
+  // 조회수 증가 메서드
+  @Transactional    // 조회하면서 업데이트하므로!
+  public Board hitBoard(Long bno) {
+    // Optional 기능 => Null 체크!
+    Optional<Board> oboard = this.boardRepository.findByBno(bno);
+
+    if(oboard.isPresent()) {
+      Board board = oboard.get();
+      // board.setHit(board.getHit() + 1);   // !!!!! 예외발생
+      board.setHit(Optional.ofNullable(board.getHit()).orElse(0) + 1);    // getHit() 값이 null일때 0으로 바꿔라
+      
+      return board;
+
+    } else {
+      throw new NotFoundException("board NOT FOUND!!");
+    }
+
+  }
+
 }
                                                                                                

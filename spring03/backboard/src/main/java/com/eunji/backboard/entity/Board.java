@@ -3,6 +3,7 @@ package com.eunji.backboard.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -44,7 +45,11 @@ public class Board {
 
   @LastModifiedDate
   @Column(name = "modifyDate")
-  private LocalDateTime modifyDate;   // 24.06.24 수정일 추가  
+  private LocalDateTime modifyDate;   // 24.06.24 수정일 추가 
+
+  // @ColumnDefault("0")  // 생성될 때 초기값 0이 들어감
+  // @Column(columnDefinition = "integer default 0")
+  private Integer hit;  // 24.06.26 조회수 추가
 
   // 사용자가 여러 개의 게시글을 작성할 수 있다. 다대일 설정(Member가 부모, Board가 자식)
   @ManyToOne

@@ -16,7 +16,7 @@ public class MainController {
 
     @GetMapping("/")
     public String main() {
-        return "redirect:/board/list";      // localhost8080/ -> localhost8080/board/list 변경
+        return "redirect:/board/list/free";      // localhost8080/ -> localhost8080/board/list 변경
     }
     
 }
