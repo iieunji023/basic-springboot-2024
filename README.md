@@ -605,6 +605,53 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
          - 서버실행	
 	  
     <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp011.png" width="730">
+
+
+## 12일차
+- Spring Boot JPA 프로젝트 개발 계속
+	1. 에러페이지 작업(404, 500, etc)
+		- application.properties 에러페이지 관련 설정 추가
+		- resource/static/img/bg_error.jpg 저장
+		- resource/templates/error/404.html, 500.html, error.html 생성
+		- controller/CustomErrorController.java 생성
+	
+	2. 비밀번호 찾기, 비밀번호 변경
+		- build.gradle 메일을 보내기 위한 디펜던시 추가
+		- application.properties 메일 설정(네이버) 입력
+		- 네이버 메일 SMTP 설정 > 환경설정 > POP3/IMAP 설정
+		
+			<img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp012.png" width="730">
+		
+		- /config/SecurityConfig.java CSRF 설정 변경(!)
+		- /service/MailService.java 생성
+		- /restcontroller/MailController.java 생성
+		- https://www.postman.com/ 다운로드
+	
+
+## 13일차
+- Spring Boot JPA 프로젝트 개발 계속
+	1. 비밀번호 초기화(계속)
+		- 로그인 화면에서 비밀번호 초기화 버튼, AJAX로 RestAPI로 이메일 보내기
+		- 메일에 링크 클릭
+		- http://localhost:8080/user/resetpassword (회원가입과 유사하게 개발)
+		
+
+		- 비밀번호 초기화 화면으로 이동
+		- 비밀번호, 비밀번호 확인 입력
+    2. 구글 로그인
+        - https://console.cloud.google.com/ 구글클라우드 콘솔
+        - 프로젝트 생성
+        - OAuth 동의화면 설정
+        - 개발 계속...
+
+## 계속
+- Spring Boot JPA 프로젝트
+    1. 남은 것
+        - 8080 -> 80 서버
+        - http -> https 변경
+
+    - 파일업로드 -AWS S3
+    - 로그인한 사용자 헤더에 표시
 		
 	
 	- 에러페이지 작업(404, 500, erc)

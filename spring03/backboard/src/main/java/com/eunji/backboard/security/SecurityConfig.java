@@ -22,6 +22,7 @@ public class SecurityConfig {
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
     // http://localhost:8080/** 로그인하지 않고도 접근할 수 있는 권한을 주겠다.
     http
+        
         // 모두 접근 가능(게시판 보기도 가능), 글쓰기는 로그인을 해야 한다.
         .authorizeHttpRequests((atr) -> atr.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
 
@@ -30,7 +31,9 @@ public class SecurityConfig {
         //                                        .permitAll())
 
         // CSRF 위변조 공격을 막는 부분 해제, 특정 URL은 CSRF 공격 리스트에서 제거
-        .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+        // .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+        // REST API 전달시 403 Error 발생
+        .csrf(csrf -> csrf.disable())
         // h2-console 페이지가 frameset, frame으로 구성 CORS와 유사한 옵션 추가
         .headers((headers) -> headers
               .addHeaderWriter(new XFrameOptionsHeaderWriter(
