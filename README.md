@@ -604,6 +604,7 @@ Java 빅데이터 개발자 과정 Spring Boot 학습 리포지토리
          
          - 서버실행	
 	  
+    <img src="https://github.com/iieunji023/basic-springboot-2024/blob/main/images/sp011.png" width="730">
 		
 	
 	- 에러페이지 작업(404, 500, erc)
