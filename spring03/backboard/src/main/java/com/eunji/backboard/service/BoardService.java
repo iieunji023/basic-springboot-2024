@@ -19,7 +19,6 @@ import com.eunji.backboard.entity.Member;
 import com.eunji.backboard.entity.Reply;
 import com.eunji.backboard.repository.BoardRepository;
 
-import groovyjarjarantlr4.v4.Tool.Option;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;

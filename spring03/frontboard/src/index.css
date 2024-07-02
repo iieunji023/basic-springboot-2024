@@ -7,7 +7,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body { 
+  height: 100%; 
+}
+
+/* index.js */
+.header{
+  height: 90px;
+}
+
+.footer{
+  height: 57px;
+}
+
+.main {
+  background-color: white;
+  min-height: 300px;
+  height: calc(100vh - 100px - 72px);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
